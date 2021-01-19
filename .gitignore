@@ -1,0 +1,13 @@
+.bundle
+vendor
+vendor/**
+
+.env
+
+tags
+**/tags
+
+.direnv
+.direnv/**
+
+result
