@@ -3,10 +3,11 @@
 ##
 # Game's running state
 class RenderState
-  attr_accessor :active, :window
+  attr_accessor :active, :window, :debug_text
 
   def initialize(conf)
     @conf = conf
+    @debug_text = ''
 
     init_window
     @active = true

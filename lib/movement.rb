@@ -7,7 +7,7 @@ require 'matrix'
 module Movement
   ACCEL = 10
   FRICTION = 2
-  COEFF = 0.2
+  COEFF = 0.3
   MAX_VEL = 20
 
   def key_dirs
@@ -44,8 +44,12 @@ module Movement
     @state.pos_x += @cs.vel[0]
     @state.pos_y += @cs.vel[1]
 
-    $stderr.printf("vel %10.2f dir [%.2f, %.2f] x %.2f y %.2f\n",
-                   @cs.vel.norm, @cs.vel[0], @cs.vel[1],
-                   @state.pos_x, @state.pos_y)
+    debug_move_data
+  end
+
+  def debug_move_data
+    @rs.debug_text += format(
+      "vel %6.2f [%6.2f, %6.2f] x %9.2f y %9.2f\n",
+      @cs.vel.norm, @cs.vel[0], @cs.vel[1], @state.pos_x, @state.pos_y)
   end
 end

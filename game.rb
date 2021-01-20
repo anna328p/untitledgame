@@ -11,6 +11,7 @@ require 'set'
   config
   render_state
   helpers
+  frames
   event_handler
   movement
   game_state
