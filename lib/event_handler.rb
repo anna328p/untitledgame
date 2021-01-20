@@ -29,6 +29,7 @@ module EventHandler
   end
 
   def key_down_event(_); end
+
   def key_up_event(_); end
 
   def quit_event

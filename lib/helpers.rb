@@ -23,5 +23,4 @@ module Helpers
 
     @ticks = new_ticks
   end
-
 end
