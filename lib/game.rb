@@ -3,8 +3,11 @@
 ##
 # Main game class
 class Game
-  include EventHandler
   include Helpers
+
+  include EventHandler
+  include MainLoop
+  include Render
 
   def initialize
     SDL2.init(SDL2::INIT_EVERYTHING)
@@ -16,46 +19,7 @@ class Game
     @rs = RenderState.new(@conf)
   end
 
-  def process_events
-    while (event = SDL2::Event.poll)
-      handle(event)
-    end
-  end
-
-  def main_loop; end
-
-  def render
-    # fill background
-    bg_rect = SDL2::Rect[0, 0, *@rs.window.size]
-    @rs.renderer.draw_color = [0, 0, 0]
-    @rs.renderer.fill_rect(bg_rect)
-
-    sample_text = mk_text(:sans_regular, :title, 'Hello, world!')
-
-    r2 = SDL2::Rect[0, 0, sample_text.w, sample_text.h]
-
-    @rs.renderer.copy(sample_text, nil, r2)
-
-    @rs.renderer.present
-  end
-
   def cleanup; end
-
-  def frame_info
-    @ticks ||= 0
-    @frames ||= 0
-    @frames += 1
-
-    new_ticks = SDL2.get_performance_counter
-
-    fps = new_ticks == @ticks ? 0 : (SDL2.get_performance_frequency / (new_ticks - @ticks))
-    if @frames.multiple_of?(500)
-      $stderr.printf("%9.2<fps>f FPS (frame %<frame>d, %15<ticks>d ticks)\n",
-                     fps: fps, frame: @frames, ticks: new_ticks)
-    end
-
-    @ticks = new_ticks
-  end
 
   def run
     while @rs.active

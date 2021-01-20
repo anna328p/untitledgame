@@ -12,6 +12,8 @@ require 'fileutils'
   render_state
   helpers
   game_state
+  main_loop
+  render
   game
 ].each do |filename|
   require_relative "lib/#{filename}"
