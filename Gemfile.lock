@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.1)
+    hashugar (1.0.1)
     narray (0.6.1.2)
     parallel (1.20.1)
     parser (3.0.0.0)
@@ -29,10 +30,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  hashugar
   narray
   rubocop
   ruby-sdl2
   sqlite3
+
+RUBY VERSION
+   ruby 2.7.2p137
 
 BUNDLED WITH
    2.1.4

@@ -9,7 +9,7 @@ let
     gemdir   = ./.;
     gemConfig = pkgs.defaultGemConfig // {
       ruby-sdl2 = attrs: {
-        buildInputs = [ SDL2 ];
+        buildInputs = [ SDL2 SDL2_ttf ];
       };
     };
   };

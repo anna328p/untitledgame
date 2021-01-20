@@ -9,6 +9,16 @@
     };
     version = "2.4.1";
   };
+  hashugar = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1cp39xp9jzzwnr52a8cfwpmhmjrg0qx7si16np1lh3xns2y82m8a";
+      type = "gem";
+    };
+    version = "1.0.1";
+  };
   narray = {
     groups = ["default"];
     platforms = [];
