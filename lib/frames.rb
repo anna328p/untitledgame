@@ -18,7 +18,7 @@ module Frames
   end
 
   def tps
-    SDL2.get_performance_frequency
+    @tps ||= SDL2.get_performance_frequency
   end
 
   def cur_ticks
@@ -32,11 +32,16 @@ module Frames
     target = cur_ticks + ticks_left
     until cur_ticks >= target; end
 
+    debug_fps
+  end
+
+  def debug_fps
     elapsed = cur_ticks - @ticks
     fps = tps / elapsed
 
     @rs.debug_text += format(
       "fps %9.2<fps>f (%6.2<ftime>f ms)\n",
-      fps: fps, ftime: elapsed / ticks_per_ms)
+      fps: fps, ftime: elapsed / ticks_per_ms
+    )
   end
 end

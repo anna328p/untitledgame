@@ -49,7 +49,9 @@ module Movement
 
   def debug_move_data
     @rs.debug_text += format(
-      "vel %6.2f [%6.2f, %6.2f] x %9.2f y %9.2f\n",
-      @cs.vel.norm, @cs.vel[0], @cs.vel[1], @state.pos_x, @state.pos_y)
+      "vel %6.2<vel>f [%6.2<vx>f %6.2<vy>f] pos [%9.2<x>f %9.2<y>f]\n",
+      vel: @cs.vel.norm, vx: @cs.vel[0], vy: @cs.vel[1],
+      x: @state.pos_x, y: @state.pos_y
+    )
   end
 end

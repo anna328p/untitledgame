@@ -15,7 +15,7 @@ class ControlState
     if name == :esc
       @keys_down.include? SDL2::Key::ESCAPE
     else
-      @keys_down.any? { @conf.keybinds[name].include?  SDL2::Key.name_of(_1) }
+      @keys_down.any? { @conf.keybinds[name].include? SDL2::Key.name_of(_1) }
     end
   end
 end

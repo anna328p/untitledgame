@@ -10,7 +10,6 @@ module EventHandler
   end
 
   def handle(event)
-    warn event.inspect
     case event
     when SDL2::Event::KeyDown, SDL2::Event::KeyUp
       key_event(event)
