@@ -60,6 +60,12 @@ class Config < Hashugar
         width: 800,
         height: 600
       },
+      font_sizes: {
+        label: 12,
+        text: 16,
+        header: 24,
+        title: 36
+      },
       fonts: {
         mono_regular: 'SourceCodePro-Regular.ttf',
         mono_bold: 'SourceCodePro-Bold.ttf',
@@ -82,16 +88,42 @@ class Assets
   def initialize(conf)
     @conf = conf
 
-    asset_path = @conf.asset_path || './assets'
+    @base_path = @conf.asset_path || './assets'
 
-    @fonts = @conf.fonts.each.to_h.transform_values do |filename|
-      SDL2::TTF.open(File.join(asset_path, 'fonts', filename), 16)
+    init_fonts
+  end
+
+  def init_fonts
+    @fonts = {}
+    @conf.font_sizes.each do |szname, ptsize|
+      @conf.fonts.each.to_h.each do |type, filename|
+        fonts[type] ||= {}
+        fonts[type][szname] = SDL2::TTF.open(File.join(@base_path, 'fonts', filename), ptsize)
+      end
     end
+  end
+end
+
+module EventHandler
+  def handle(event)
+    warn event.inspect
+    case event
+    when SDL2::Event::Quit
+      quit_event
+    end
+  end
+
+  def quit_event
+    p @rs
+    @rs.window.destroy
+    @rs.active = false
   end
 end
 
 # Main game class
 class Game
+  include EventHandler
+
   def init
     SDL2.init(SDL2::INIT_EVERYTHING)
     SDL2::TTF.init
@@ -104,18 +136,14 @@ class Game
 
   def process_events
     while (event = SDL2::Event.poll)
-      puts event.inspect
-      if event.instance_of?(SDL2::Event::Quit)
-        @rs.window.destroy
-        @rs.active = false
-      end
+      handle(event)
     end
   end
 
   def main_loop; end
 
-  def mk_text(font_type, text)
-    surface = @assets.fonts[font_type].render_blended(text, [255, 255, 255])
+  def mk_text(font_type, size, text)
+    surface = @assets.fonts[font_type][size].render_blended(text, [255, 255, 255])
     @rs.renderer.create_texture_from(surface)
   end
 
@@ -125,7 +153,7 @@ class Game
     @rs.renderer.draw_color = [0, 0, 0]
     @rs.renderer.fill_rect(bg_rect)
 
-    sample_text = mk_text(:sans_regular, 'Hello, world!')
+    sample_text = mk_text(:sans_regular, :title, 'Hello, world!')
 
     r2 = SDL2::Rect[0, 0, sample_text.w, sample_text.h]
 
