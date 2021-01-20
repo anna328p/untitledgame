@@ -20,20 +20,17 @@ module EventHandler
   end
 
   def key_event(event)
+    kc = SDL2::Key.keycode_from_scancode(event.scancode)
+
     case event
     when SDL2::Event::KeyDown
-      key_down_event(event)
+      @cs.keys_down.add kc
     when SDL2::Event::KeyUp
-      key_up_event(event)
+      @cs.keys_down.delete kc
     end
   end
 
-  def key_down_event(_); end
-
-  def key_up_event(_); end
-
   def quit_event
-    p @rs
     @rs.window.destroy
     @rs.active = false
   end

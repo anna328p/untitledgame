@@ -17,6 +17,8 @@ class Game
     @assets = Assets.new(@conf)
 
     @rs = RenderState.new(@conf)
+    @cs = ControlState.new(@conf)
+    @state = GameState.new
   end
 
   def cleanup; end
@@ -27,7 +29,8 @@ class Game
       main_loop
       render
 
-      frame_info
+      # frame_limit unless @rs.vsync
+      # frame_info
     end
 
     cleanup

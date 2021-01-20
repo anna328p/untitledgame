@@ -33,6 +33,12 @@ class Config < Hashugar
         sans_regular: 'SourceSans3-Regular.ttf',
         sans_bold: 'SourceSans3-Bold.ttf',
         sans_italic: 'SourceSans3-It.ttf'
+      },
+      keybinds: {
+        left: %w[A Left],
+        up: %w[W Up],
+        right: %w[D Right],
+        down: %w[S Down]
       }
     }
 

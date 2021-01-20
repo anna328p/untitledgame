@@ -4,14 +4,17 @@
 Bundler.require(:default)
 require 'yaml'
 require 'fileutils'
+require 'set'
 
 %w[
   assets
   config
-  event_handler
   render_state
   helpers
+  event_handler
+  movement
   game_state
+  control_state
   main_loop
   render
   game

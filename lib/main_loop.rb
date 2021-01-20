@@ -3,5 +3,9 @@
 ##
 # Main game loop
 module MainLoop
-  def main_loop; end
+  include Movement
+
+  def main_loop
+    do_movement
+  end
 end
