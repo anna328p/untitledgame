@@ -4,7 +4,7 @@ require 'matrix'
 
 ##
 # Handle movement keys
-module Movement
+module Moveable
   ACCEL = 10
   FRICTION = 2
   COEFF = 0.3
